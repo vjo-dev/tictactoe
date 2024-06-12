@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://dl1nuib46k1s5"]
+
+[ext_resource type="PackedScene" uid="uid://dbdk0b54iokhs" path="res://board.tscn" id="1_awkva"]
+[ext_resource type="Script" path="res://main.gd" id="1_fmq8f"]
+[ext_resource type="PackedScene" uid="uid://bbwhabqtxvwyg" path="res://circle.tscn" id="2_tdjnf"]
+[ext_resource type="PackedScene" uid="uid://be5o0j14vroyl" path="res://cross.tscn" id="3_cwsqb"]
+[ext_resource type="PackedScene" uid="uid://bqlgv710nffo5" path="res://hud.tscn" id="5_qihob"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10kwj"]
+bg_color = Color(0.294118, 0.65098, 0.776471, 1)
+border_width_left = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5upn5"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.462745, 0.462745, 0.462745, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Main" type="Node"]
+script = ExtResource("1_fmq8f")
+circle_scene = ExtResource("2_tdjnf")
+cross_scene = ExtResource("3_cwsqb")
+
+[node name="Board" parent="." instance=ExtResource("1_awkva")]
+position = Vector2(300, 300)
+
+[node name="SidePanel" type="Panel" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_10kwj")
+
+[node name="PlayerLabel" type="Label" parent="."]
+offset_left = 600.0
+offset_top = 120.0
+offset_right = 900.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 40
+text = "Next Player:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPanel" type="Panel" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -100.0
+offset_right = -50.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5upn5")
+
+[node name="HUD" parent="." instance=ExtResource("5_qihob")]
+process_mode = 2
+
+[connection signal="restart" from="HUD" to="." method="_on_hud_restart"]

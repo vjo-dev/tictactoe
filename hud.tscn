@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqlgv710nffo5"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_6nupr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ge1sh"]
+bg_color = Color(0.243137, 0.682353, 0.607843, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.443137, 0.443137, 0.443137, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iclk4"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_6nupr")
+
+[node name="HudPanel" type="Panel" parent="."]
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 500.0
+offset_bottom = 400.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ge1sh")
+
+[node name="Message" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 500.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 40
+text = "Player 1 wins!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+offset_left = 200.0
+offset_top = 300.0
+offset_right = 400.0
+offset_bottom = 375.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_iclk4")
+text = "Play Again"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
